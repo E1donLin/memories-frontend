@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core'
 import { GoogleLogin } from 'react-google-login'
 import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import useStyles from './styles'

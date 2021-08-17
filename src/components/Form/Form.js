@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { createPost, updatePost } from '../../actions/posts'
 import useStyles from './style'
 import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 // Get the current ID
 
@@ -18,11 +19,12 @@ const From = ({ currentId, setCurrentId }) => {
   })
 
   const post = useSelector((state) =>
-    currentId ? state.posts.find((p) => p._id === currentId) : null
+    currentId ? state.posts.posts.find((p) => p._id === currentId) : null
   )
   const user = JSON.parse(localStorage.getItem('profile'))
 
   const dispatch = useDispatch()
+  const history = useHistory()
 
   useEffect(() => {
     if (post) setPostData(post)
@@ -33,7 +35,7 @@ const From = ({ currentId, setCurrentId }) => {
     if (currentId) {
       dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }))
     } else {
-      dispatch(createPost({ ...postData, name: user?.result?.name }))
+      dispatch(createPost({ ...postData, name: user?.result?.name }, history))
     }
     clear()
   }
