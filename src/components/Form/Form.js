@@ -35,7 +35,9 @@ const From = ({ currentId, setCurrentId }) => {
     if (currentId) {
       dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }))
     } else {
-      dispatch(createPost({ ...postData, name: user?.result?.name }, history))
+      if (postData.title !== '' && postData.message !== '') {
+        dispatch(createPost({ ...postData, name: user?.result?.name }, history))
+      }
     }
     clear()
   }
@@ -80,7 +82,10 @@ const From = ({ currentId, setCurrentId }) => {
           onChange={(e) => {
             setPostData({ ...postData, title: e.target.value })
           }}
-        ></TextField>
+          onKeyPress={(e) => {
+            e.key === 'Enter' && e.preventDefault()
+          }}
+        />
         <TextField
           name="message"
           variant="outlined"
@@ -90,7 +95,10 @@ const From = ({ currentId, setCurrentId }) => {
           onChange={(e) => {
             setPostData({ ...postData, message: e.target.value })
           }}
-        ></TextField>
+          onKeyPress={(e) => {
+            e.key === 'Enter' && e.preventDefault()
+          }}
+        />
         <TextField
           name="tags"
           variant="outlined"
@@ -100,7 +108,10 @@ const From = ({ currentId, setCurrentId }) => {
           onChange={(e) => {
             setPostData({ ...postData, tags: e.target.value.split(',') })
           }}
-        ></TextField>
+          onKeyPress={(e) => {
+            e.key === 'Enter' && e.preventDefault()
+          }}
+        />
         <div className={classes.fileInput}>
           <FileBase
             type="file"
