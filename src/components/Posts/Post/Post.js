@@ -25,7 +25,7 @@ const Post = ({ post, setCurrentId }) => {
   const user = JSON.parse(localStorage.getItem('profile'))
 
   const openPost = () => {
-    history.push(`/post/${post._id}`)
+    history.push(`/posts/${post._id}`)
   }
 
   const Likes = () => {
